@@ -8,7 +8,7 @@ dockerpath=rhotimee/capstone-app
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run capstone-app --image=$dockerpath:latest --port=80
+kubectl run capstone-app --image=$dockerpath --port=80
 
 
 # Step 3:
