@@ -8,7 +8,7 @@ Parameters:
     Type: String
 
 Resources:
-  BastionSecurityGroup:
+  JenkinsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Allow http and ssh on bastion instance"
@@ -27,22 +27,21 @@ Resources:
   BastionInstance:
     Type: AWS::EC2::Instance
     Properties:
-      IamInstanceProfile: !Ref RootInstanceProfile
       ImageId: ami-06d51e91cea0dac8d
-      InstanceType: t2.medium
+      InstanceType: t2.micro
       KeyName: "Bastion"
       SecurityGroupIds:
-        - Ref: BastionSecurityGroup
+        - Ref: JenkinsSecurityGroup
       SubnetId:
         Fn::ImportValue: !Sub ${EnvironmentName}-PUB1-SUBNETS
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
           sudo su
-          apt-get update -y
-          apt-get install unzip awscli -y
-          apt-get install apache2 -y
-          systemctl start apache2.service
-          cd /var/www/html
-          aws s3 cp s3://udacity-rotimi-demo-1/udacity-starter-website.zip .
-          unzip -o udacity-starter-website.zip
+          sudo apt install -y default-jdk
+          wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+          sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+          apt update
+          sudo apt install jenkins
+          sudo systemctl start jenkins
+          sudo ufw allow 8080

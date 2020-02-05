@@ -27,7 +27,6 @@ Resources:
   BastionInstance:
     Type: AWS::EC2::Instance
     Properties:
-      IamInstanceProfile: !Ref RootInstanceProfile
       ImageId: ami-06d51e91cea0dac8d
       InstanceType: t2.medium
       KeyName: "Bastion"
@@ -40,9 +39,5 @@ Resources:
           #!/bin/bash
           sudo su
           apt-get update -y
-          apt-get install unzip awscli -y
-          apt-get install apache2 -y
-          systemctl start apache2.service
-          cd /var/www/html
-          aws s3 cp s3://udacity-rotimi-demo-1/udacity-starter-website.zip .
-          unzip -o udacity-starter-website.zip
+          apt install docker.io -y
+          docker run -d -p 80:80 rhotimee/capstone-app

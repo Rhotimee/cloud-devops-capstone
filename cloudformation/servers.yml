@@ -92,6 +92,8 @@ Resources:
           sudo su
           apt-get update -y
           apt-get install unzip awscli -y
+          apt install docker.io -y
+          docker run -d -p 80:80 rhotimee/capstone-app
 
   WebAppAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
