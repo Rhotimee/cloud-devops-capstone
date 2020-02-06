@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        sh "sudo npm install -g yarn"
+        sh "curl -o- -L https://yarnpkg.com/install.sh | bash"
         sh "yarn install"
       }
     }
