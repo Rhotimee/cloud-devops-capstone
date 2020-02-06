@@ -1,22 +1,19 @@
 pipeline {
-  agent { docker { image 'node:10' } }
+  agent any
   stages {
     stage('Prepare') {
       steps {
-        sh "chown -R $USER:$GROUP ~/.npm"
-        sh "chown -R $USER:$GROUP ~/.config"
-        sh "npm install -g yarn"
-        sh "yarn install"
+        sh "apt-get install tidy"
       }
     }
     stage('build') {
       steps {
-        sh 'yarn build'
+        sh 'echo Building...'
       }
     }
-    stage('test') {
+    stage('lint') {
       steps {
-        sh 'yarn test'
+        sh 'tidy -q -e *.html'
       }
     }
   }
