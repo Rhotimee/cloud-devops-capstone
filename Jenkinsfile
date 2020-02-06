@@ -3,6 +3,8 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
+        sh "chown -R $USER:$GROUP ~/.npm"
+        sh "chown -R $USER:$GROUP ~/.config"
         sh "npm install -g yarn"
         sh "yarn install"
       }
