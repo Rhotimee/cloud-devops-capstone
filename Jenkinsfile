@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Push Docker Image') {
       steps {
-        withDockerRegistry(credentialsId: "docker_hub_login") {
+        withDockerRegistry(url: "https://registry.hub.docker.com", credentialsId: "dockerhub") {
           sh 'docker image tag capstone-app rhotimee/capstone-app'
           sh 'docker push rhotimee/capstone-app'
         }
