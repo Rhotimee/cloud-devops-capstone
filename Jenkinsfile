@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Prepare') {
-      steps {
-        sh "apt-get install tidy"
-      }
-    }
     stage('build') {
       steps {
         sh 'echo Building...'
@@ -13,7 +8,7 @@ pipeline {
     }
     stage('lint') {
       steps {
-        sh 'tidy -q -e *.html'
+        sh 'tidy -q -e app/index.html'
       }
     }
   }
