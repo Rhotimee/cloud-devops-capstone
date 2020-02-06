@@ -21,6 +21,10 @@ Resources:
           IpProtocol: "tcp"
           FromPort: 22
           ToPort: 22
+        - CidrIp: "0.0.0.0/0"
+          IpProtocol: "tcp"
+          FromPort: 8080
+          ToPort: 8080
       VpcId:
         Fn::ImportValue: !Sub "${EnvironmentName}-VPCID"
 
@@ -41,3 +45,8 @@ Resources:
           apt-get update -y
           apt install docker.io -y
           docker run -d -p 80:80 rhotimee/capstone-app
+          apt-get install -y openjdk-8-jre
+          wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+          sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+          apt update -y
+          apt install jenkins -y
