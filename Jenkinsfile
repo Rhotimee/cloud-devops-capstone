@@ -1,20 +1,27 @@
 pipeline {
-  agent { docker { image 'node:latest' } }
+  agent any
   stages {
-    stage('Prepare') {
-      steps {
-        sh "npm install -g yarn"
-        sh "yarn install"
-      }
-    }
     stage('build') {
       steps {
-        sh 'yarn build'
+        sh 'echo Building...'
       }
     }
-    stage('test') {
+    stage('lint') {
       steps {
-        sh 'yarn test'
+        sh 'tidy -q -e app/index.html'
+      }
+    }
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t rhotimee/capstone-app .'
+      }
+    }
+    stage('Push Docker Image') {
+      steps {
+        withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
+          sh 'docker image tag capstone-app rhotimee/capstone-app'
+          sh 'docker push rhotimee/capstone-app'
+        }
       }
     }
   }
