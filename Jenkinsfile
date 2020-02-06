@@ -16,13 +16,5 @@ pipeline {
         sh 'docker build -t capstone-app .'
       }
     }
-    stage('Push Docker Image') {
-      steps {
-        withDockerRegistry(credentialsId: "docker_hub_login") {
-          sh 'docker image tag capstone-app rhotimee/capstone-app'
-          sh 'docker push rhotimee/capstone-app'
-        }
-      }
-    }
   }
 }
