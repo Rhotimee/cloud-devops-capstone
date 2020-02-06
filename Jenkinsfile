@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
+        sh "chown -R 111:116 '/.npm'"
         sh "npm install -g yarn"
         sh "yarn install"
       }
