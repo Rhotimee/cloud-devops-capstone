@@ -1,9 +1,9 @@
 pipeline {
-  agent { docker { image 'node:6.3' } }
+  agent { docker { image 'node:latest' } }
   stages {
     stage('Prepare') {
       steps {
-        sh "curl -o- -L https://yarnpkg.com/install.sh | bash"
+        sh "npm install -g yarn"
         sh "yarn install"
       }
     }
