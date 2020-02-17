@@ -24,5 +24,12 @@ pipeline {
         }
       }
     }
+    stage('Deployment') {
+      steps {
+        withAWS([url: "", credentialsId: "dockerhub"]) {
+          sh 'kubectl apply -f deployments/deployment.yaml'
+        }
+      }
+    }
   }
 }
