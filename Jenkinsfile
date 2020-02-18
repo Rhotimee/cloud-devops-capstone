@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Get Commit ID') {
+      steps {
+        GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true) 
+        sh 'echo ${GIT_COMMIT_HASH}'
+      }
+    }
     stage('build') {
       steps {
         sh 'echo Building...'
@@ -19,7 +25,7 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
-          sh 'docker image tag latest rhotimee/capstone-app'
+          sh 'docker image tag capstone-app rhotimee/capstone-app'
           sh 'docker push rhotimee/capstone-app'
         }
       }
@@ -29,6 +35,11 @@ pipeline {
         withAWS(credentials: "aws") {
           sh 'kubectl apply -f deployments/deployment.yaml'
         }
+      }
+    }
+    stage('Clean Up') {
+      steps {
+        sh 'docker system prune'
       }
     }
   }
