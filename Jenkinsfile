@@ -13,13 +13,13 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t rhotimee/capstone-app .'
+        sh 'docker build -t rhotimee/capstone-app:v1 .'
       }
     }
     stage('Push Docker Image') {
       steps {
         withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
-          sh 'docker push rhotimee/capstone-app'
+          sh 'docker push rhotimee/capstone-app:v1'
         }
       }
     }

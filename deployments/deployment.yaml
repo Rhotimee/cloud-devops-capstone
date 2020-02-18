@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: capstone-app
-          image: rhotimee/capstone-app:latest
+          image: rhotimee/capstone-app:v1
           imagePullPolicy: "Always"
           ports:
             - containerPort: 80
