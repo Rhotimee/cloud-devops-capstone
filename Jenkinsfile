@@ -2,10 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Get Commit ID') {
-      steps {
-        GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true) 
-        sh 'echo ${GIT_COMMIT_HASH}'
-      }
+      GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true) 
+      sh 'echo ${GIT_COMMIT_HASH}'
     }
     stage('build') {
       steps {
