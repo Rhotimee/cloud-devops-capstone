@@ -2,8 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Get Commit ID') {
-      GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true) 
-      sh 'echo ${GIT_COMMIT_HASH}'
+      sh "git rev-parse --short HEAD > .git/commit-id"
+      def commit_id = readFile('.git/commit-id').trim()
+      sh "echo ${commit_id}"
     }
     stage('build') {
       steps {
