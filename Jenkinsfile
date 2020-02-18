@@ -26,7 +26,9 @@ pipeline {
     }
     stage('Deployment') {
       steps {
-        sh 'kubectl apply -f deployments/deployment.yaml'
+        withAWS(credentials: "aws") {
+          sh 'kubectl apply -f deployments/deployment.yaml'
+        }
       }
     }
   }
