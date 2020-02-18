@@ -11,5 +11,5 @@ docker build -t capstone-app .
 docker images
 
 # Step 3: 
-# Run flask app
+# Run app
 docker run -p 80:80 capstone-app

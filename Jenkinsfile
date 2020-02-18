@@ -8,7 +8,7 @@ pipeline {
     }
     stage('lint') {
       steps {
-        sh 'tidy -q -e app/index.html'
+        sh 'tidy -q -e index.html'
       }
     }
     stage('Build Docker Image') {
