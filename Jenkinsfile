@@ -1,13 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Get Commit ID') {
-      steps {
-        sh "git rev-parse --short HEAD > .git/commit-id"
-        def commit_id = readFile('.git/commit-id').trim()
-        sh "echo ${commit_id}"
-      }
-    }
     stage('build') {
       steps {
         sh 'echo Building...'
