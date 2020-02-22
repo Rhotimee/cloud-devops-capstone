@@ -10,7 +10,7 @@ Rolling Updates was used for continuous deployment of the application.
 
 #### Commands
 ```docker build -t capstone-app .```\
-```docker push rhotimee/capstone-app```
+```docker push rhotimee/capstone-app```\
 ```kubectl apply -f deployments/load-balancer.yaml```\
 ```kubectl apply -f deployments/deployment.yaml```\
 
