@@ -8,14 +8,15 @@ This project project uses Jenkins, Docker, Kubernetes and Cloudformation to impl
 
 Rolling Updates was used for continuous deployment of the application.
 
-`docker build -t capstone-app .`
-`docker push rhotimee/capstone-app`
-`kubectl apply -f deployments/load-balancer.yaml`
-`kubectl apply -f deployments/deployment.yaml`
+#### Commands
+```docker build -t capstone-app .```
+```docker push rhotimee/capstone-app```
+```kubectl apply -f deployments/load-balancer.yaml```
+```kubectl apply -f deployments/deployment.yaml```
 
-`kubectl get deployments`
-`kubectl get nodes`
-`kubectl get pods`
+```kubectl get deployments```
+```kubectl get nodes```
+```kubectl get pods```
 
 References
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
