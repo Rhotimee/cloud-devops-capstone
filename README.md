@@ -19,6 +19,6 @@ Rolling Updates was used for continuous deployment of the application.
 ```kubectl get pods```\
 
 References
-https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
-https://codeburst.io/getting-started-with-kubernetes-deploy-a-docker-container-with-kubernetes-in-5-minutes-eb4be0e96370
-https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+- https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
+- https://codeburst.io/getting-started-with-kubernetes-deploy-a-docker-container-with-kubernetes-in-5-minutes-eb4be0e96370
+- https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
